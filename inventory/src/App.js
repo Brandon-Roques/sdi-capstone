@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect, useContext } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import Home from './Components/Home';
+import Login from './Components/Login';
+import Profile from './Components/Profile';
+import Header from './Components/Header';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
+export const Context = React.createContext();
+
+const App = () => {
+
+  const [users, setUsers] = useState([]);
+  const [loggedin, setLoggedin] = useState(false);
+  const [specificUser, setSpecificuser] = useState([])
+  const navigate = useNavigate();
+  useEffect(() => {
+    fetch('http://localhost:4000/users')
+      .then(response => response.json())
+      .then(data => setUsers(data))
+  }, [])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Context.Provider value={{ users, loggedin, setLoggedin, specificUser, setSpecificuser }} >
+        <Header />
+        <Routes>
+          <Route path='/' element={<Home />} />;
+          <Route path='/login' element={<Login />} />;
+          <Route path='/profile' element={<Profile />} />
+        </Routes>
+      </Context.Provider>
+    </>
   );
 }
 
