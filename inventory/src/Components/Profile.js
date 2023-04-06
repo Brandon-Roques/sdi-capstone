@@ -15,24 +15,44 @@ const Profile = () => {
     useEffect(() => {
         if (loggedin === false) navigate('/')
     }, [loggedin])
-    useEffect(() => {
-        fetch(`http://localhost:4000/user/${specificUser.userid}`)
-            .then(response => response.json())
-            .then(data => setUserData(data))
-    },[])
+    // useEffect(() => {
+    //     fetch(`http://localhost:4000/user/${specificUser.userid}`)
+    //         .then(response => response.json())
+    //         .then(data => setUserData(data))
+    // },[])
     const sendUpdate = () => {
-        const dataToSend = {userid: specificUser.userid}
+        const dataToSend = {}
+        if (!Array.isArray(firstname)) {
+            dataToSend["first_name"] = firstname
+        }
+        if (!Array.isArray(lastname)) {
+            dataToSend["last_name"] = lastname
+        }
+        if (!Array.isArray(password)) {
+            dataToSend["password"] = password
+        }
+        if (!Array.isArray(username)) {
+            dataToSend["username"] = username
+        }
         fetch(`http://localhost:4000/user/${specificUser.userid}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': "application/json",
             },
-            body: JSON.stringify(newItem)
+            body: JSON.stringify(dataToSend)
         })
+        .then((response) => response.json())
+        .then((data) => {
+            setSpecificuser(data[0])
+            setUpdateInfo(true)
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        })  
         }
-    }
     return (
         <>
+        {console.log('userdata', specificUser)}
             <Row>
                 <Col className='text-center'>
                     User Info
@@ -61,7 +81,7 @@ const Profile = () => {
                     <InputGroup>
                         <Form.Control placeholder="Password" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setPassword(e.target.value)} />
                     </InputGroup>
-                    <Button variant='primary' onClick={() => setUpdateInfo(false)}>Change</Button> <Button variant='primary' onClick={() => setUpdateInfo(true)}>Go Back</Button> 
+                    <Button variant='primary' onClick={sendUpdate}>Change</Button> <Button variant='primary' onClick={() => setUpdateInfo(true)}>Go Back</Button> 
                         </Col>      }
          
             </Row>

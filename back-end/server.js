@@ -27,7 +27,7 @@ app.get('/items', (req, res) => {
 })
 
 //this is for all the items of a specific user
-app.get('/user/:id', (req, res) => {
+app.get('/userr/:id', (req, res) => {
     const userid = req.params.id; 
     knex
         .select('*')
@@ -51,13 +51,16 @@ app.patch('/user/:id', (req, res) => {
         .from('users')
         .where('userid', userid)
         .update(body)
-        .then(data => res.status(200).json(data))
+        .then(async function (result) {
+            const ids = await knex('users').where("userid", req.params.id);
+            res.status(201).json(ids); // respond back to request
+        })
         .catch(err =>
-            res.status(404).json({
+            res.json({
                 message:
-                    'The data you are looking for could not be found. Please try again.'
-            }))
-
+                    'The user information could not be updated.'
+            })
+        );
 })
 
 app.listen(port, () => console.log(`Server listening on port ${port}`))
