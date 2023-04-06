@@ -15,13 +15,14 @@ const Header = () => {
                 <Nav.Item className="justif-content-end">
                     <Nav.Link onClick={() => navigate("/profile")}>Profile</Nav.Link>
                 </Nav.Item>
-                             <Nav.Item className="justif-content-end">
-                             <Nav.Link onClick={() => {
-                                setLoggedin(false)
-                                navigate("/")}}>Signout</Nav.Link>
-                         </Nav.Item>
-                         </>
-                
+                <Nav.Item className="justif-content-end">
+                    <Nav.Link onClick={() => {
+                        setLoggedin(false)
+                        navigate("/")
+                    }}>Signout</Nav.Link>
+                </Nav.Item>
+            </>
+
             ) : (
                 <Nav.Item className="justif-content-end">
                     <Nav.Link onClick={() => navigate("/login")}>login</Nav.Link>

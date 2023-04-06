@@ -4,6 +4,7 @@ import Home from './Components/Home';
 import Login from './Components/Login';
 import Profile from './Components/Profile';
 import Header from './Components/Header';
+import AddItem from './Components/AddItem';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const Context = React.createContext();
@@ -27,6 +28,7 @@ const App = () => {
           <Route path='/' element={<Home />} />;
           <Route path='/login' element={<Login />} />;
           <Route path='/profile' element={<Profile />} />
+          <Route path='/addItem' element={<AddItem />} />
         </Routes>
       </Context.Provider>
     </>

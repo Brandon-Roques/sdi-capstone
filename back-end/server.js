@@ -27,7 +27,7 @@ app.get('/items', (req, res) => {
 })
 
 //this is for all the items of a specific user
-app.get('/userr/:id', (req, res) => {
+app.get('/user/:id', (req, res) => {
     const userid = req.params.id; 
     knex
         .select('*')
