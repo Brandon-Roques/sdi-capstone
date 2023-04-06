@@ -11,6 +11,7 @@ app.get('/users', (req, res) => {
     knex
         .select('*')
         .from('users')
+        .orderBy('userid')
         .then(data => res.status(200).json(data))
 })
 
@@ -18,6 +19,7 @@ app.get('/items', (req, res) => {
     knex
         .select('*')
         .from('items')
+        .orderBy('id')
         .then(data => res.status(200).json(data))
         .catch(err =>
             res.status(404).json({
@@ -32,6 +34,7 @@ app.get('/user/:id', (req, res) => {
     knex
         .select('*')
         .from('items')
+        .orderBy('id')
         .where('userid', userid)
         .then(data => res.status(200).json(data))
         .catch(err =>
@@ -52,8 +55,89 @@ app.patch('/user/:id', (req, res) => {
         .where('userid', userid)
         .update(body)
         .then(async function (result) {
-            const ids = await knex('users').where("userid", req.params.id);
-            res.status(201).json(ids); // respond back to request
+            const userinfo = await knex('items').where("userid", req.params.id);
+            res.status(201).json(userinfo); // respond back to request
+        })
+        .catch(err =>
+            res.json({
+                message:
+                    'The user information could not be updated.'
+            })
+        );
+})
+
+//add new item
+app.post('/additem/:id', (req, res) => {
+    const userid = req.params.id;
+    const body = req.body;
+    knex
+        .select('*')
+        .from('items')
+        .insert(body)
+        .then(async function (result) {
+            const allitems = await knex('items').where("userid", userid);
+            res.json(allitems); // respond back to request
+        })
+        .catch(err =>
+            res.json({
+                message:
+                    'The user information could not be updated.'
+            })
+        );
+})
+
+//delete item
+app.delete('/item/:id', (req, res) => {
+    const id = req.params.id;
+    const userid = req.body;
+    knex
+        .select('*')
+        .from('items')
+        .where('id', id)
+        .del()
+        .then(async function (result) {
+            const allitems = await knex('items').where(userid);
+            res.json(allitems); // respond back to request
+        })
+        .catch(err =>
+            res.json({
+                message:
+                    'The user information could not be updated.'
+            })
+        );
+})
+
+//update specific item
+app.patch('/item/:id', (req, res) => {
+    const userid = req.params.id;
+    const body = req.body;
+    knex
+        .select('*')
+        .from('items')
+        .where('id', body.id)
+        .update(body)
+        .then(async function (result) {
+            const iteminfo = await knex('items').where("userid", userid);
+            res.status(201).json(iteminfo); // respond back to request
+        })
+        .catch(err =>
+            res.json({
+                message:
+                    'The user information could not be updated.'
+            })
+        );
+})
+
+//add a new user
+app.post('/signup', (req, res) => {
+    const body = req.body;
+    knex 
+        .select('*')
+        .from('users')
+        .insert(body)
+        .then(async function (result) {
+            const users = await knex('users');
+            res.json(users); // respond back to request
         })
         .catch(err =>
             res.json({
