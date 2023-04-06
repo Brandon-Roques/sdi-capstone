@@ -55,7 +55,7 @@ app.patch('/user/:id', (req, res) => {
         .where('userid', userid)
         .update(body)
         .then(async function (result) {
-            const userinfo = await knex('items').where("userid", req.params.id);
+            const userinfo = await knex('users').where("userid", req.params.id);
             res.status(201).json(userinfo); // respond back to request
         })
         .catch(err =>

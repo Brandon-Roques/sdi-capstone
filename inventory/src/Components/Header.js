@@ -24,9 +24,14 @@ const Header = () => {
             </>
 
             ) : (
+                <>
                 <Nav.Item className="justif-content-end">
-                    <Nav.Link onClick={() => navigate("/login")}>login</Nav.Link>
+                    <Nav.Link onClick={() => navigate("/login")}>Login</Nav.Link>
                 </Nav.Item>
+                 <Nav.Item className="justif-content-end">
+                 <Nav.Link onClick={() => navigate("/signup")}>Sign Up</Nav.Link>
+             </Nav.Item>
+             </>
             )}
         </Nav>
     );

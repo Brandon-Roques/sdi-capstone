@@ -8,7 +8,6 @@ const Login = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
     const logginCheck = () => {
         var login_check = 'no'
         users.map((user) => {
