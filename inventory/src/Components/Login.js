@@ -4,7 +4,7 @@ import { Context } from "../App";
 import { Button, Row, Col, Form, InputGroup } from 'react-bootstrap';
 
 const Login = () => {
-    const { users, setUsers, setLoggedin, setSpecificuser } = React.useContext(Context);
+    const { users, setUsers, setLoggedin, specificUser, setSpecificuser } = React.useContext(Context);
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -18,7 +18,9 @@ const Login = () => {
         users.map((user) => {
             if (username === user.username && password === user.password) {
                 setLoggedin(true)
+                console.log('user', user)
                 setSpecificuser(user)
+                console.log('login specificUser', specificUser)
                 login_check = 'yes'
                 alert("Login successful", navigate('/profile'))
             }

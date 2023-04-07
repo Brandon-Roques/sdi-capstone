@@ -14,6 +14,7 @@ const AddItem = () => {
     }, [loggedin]);
     const inputNewItem = () => {
         if(!Number.isInteger(Number(quantityy))) alert('Please enter a number in the Quantity field')
+        else if(Array.isArray(itemName) || Array.isArray(description) || Array.isArray(quantityy)) alert("Please make sure all fields are filled out")
         else {
             const dataToSend = {"userid": specificUser.userid, "item_name": itemName, "description": description, quantity: quantityy};
             fetch(`http://localhost:4000/additem/${specificUser.userid}`, {

@@ -6,10 +6,9 @@
   "scripts": {
     "npm": "npm install --prefix ./back-end",
     "npm-front": "npm install --prefix ./inventory",
-    "server": "nodemon server.js",
     "begin": "docker run --rm --name pg-docker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres",
-    "reset": "npx knex migrate:rollback --all && npx knex migrate:latest && npx knex seed:run",
-    "start": "npm run npm && npm run npm-front && npm run begin --prefix ./back-end && npm run server --prefix ./back-end",
+    "db": "npx knex migrate:latest && npx knex seed:run",
+    "start": "npm run npm && npm run npm-front && npm run begin --prefix ./back-end && npm run db --prefix ./back-end && npm run server --prefix ./back-end",
     "start-front": "npm start --prefix ./inventory",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -21,7 +21,7 @@ const Profile = () => {
     useEffect(() => {
         fetch(`http://localhost:4000/user/${specificUser.userid}`)
             .then((response) => response.json())
-            .then((data) => setUserData(data));
+            .then(data => setUserData(data));
     }, []);
     const sendUpdate = () => {
         const dataToSend = {};
@@ -161,8 +161,8 @@ const Profile = () => {
                     <Row>
                         {updateItem[0] ? userData.map((item) => {
                             return (
-                                <Col style={{ margin: 20, marginLeft: 60 }}>
-                                    <Card className="text-center" style={{ width: "400px" }}>
+                                <Col style={{ margin: 20, marginLeft: 60 }} md={{span:4}}>
+                                    <Card className="text-center" style={{ width: "400px", margin:20 }}>
                                         <Card.Header>User Added Item</Card.Header>
                                         <Card.Body>
                                             <Card.Title>{item.item_name}</Card.Title>
@@ -180,6 +180,7 @@ const Profile = () => {
                         }) : userData.map((item) => {
                             if (!Array.isArray(updateItem[1]) && item.id === updateItem[1]) {
                                 return (
+                                    <Col style={{ margin: 20, marginLeft: 60 }} md={{span:4}}>
                                     <Card className="text-center" style={{ width: "400px" }}>
                                         <Card.Header>User Added Item</Card.Header>
                                         <Card.Body>
@@ -210,9 +211,11 @@ const Profile = () => {
                                             <Button classname="m-3" variant="primary" onClick={() => setUpdateItem([false, []])}>Go back</Button>
                                         </Card.Body>
                                     </Card>
+                                    </Col>
                                 )
                             } else {
                                 return (
+                                    <Col style={{ margin: 20, marginLeft: 60 }} md={{span:4}}>
                                     <Card className="text-center" style={{ width: "400px" }}>
                                         <Card.Header>User Added Item</Card.Header>
                                         <Card.Body>
@@ -222,6 +225,7 @@ const Profile = () => {
                                             <Button classname="m-3" variant="primary" onClick={() => deleteItem(item.id)}>Delete</Button>
                                         </Card.Body>
                                     </Card>
+                                    </Col>
                                 )
                             }
                         })}

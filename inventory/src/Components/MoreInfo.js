@@ -5,8 +5,8 @@ import { Context } from '../App';
 const MoreInfo = () => {
     const { loggedin, specificUser, setSpecificuser, userData, setUserData, moreInfo, setMoreInfo } = React.useContext(Context);
     return (
-        <Row>
-            <Col md={{ span: 4, offset: 4 }}>
+        <Row style={{marginTop: 50}} className='justify-content-center'>
+            <Col md={{ span: 3 }}>
                 <Card className="text-center" style={{ width: "400px" }}>
                     <Card.Header>User Added Item</Card.Header>
                     <Card.Body>

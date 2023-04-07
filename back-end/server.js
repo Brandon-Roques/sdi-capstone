@@ -29,14 +29,16 @@ app.get('/items', (req, res) => {
 })
 
 //this is for all the items of a specific user
-app.get('/user/:id', (req, res) => {
+app.get('/user/:id', async (req, res) => {
     const userid = req.params.id; 
-    knex
+    await knex
         .select('*')
         .from('items')
         .orderBy('id')
         .where('userid', userid)
-        .then(data => res.status(200).json(data))
+        .then(data => {
+            // console.log('data', data)
+            res.status(200).json(data)})
         .catch(err =>
             res.status(404).json({
                 message:
