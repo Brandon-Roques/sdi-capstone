@@ -1,4 +1,4 @@
-##To get started, fork and clone this repository.
+## To get started, fork and clone this repository.
 
 After the reposity has been cloned, open it in VS Code.
 
