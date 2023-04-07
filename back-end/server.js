@@ -91,14 +91,15 @@ app.post('/additem/:id', (req, res) => {
 //delete item
 app.delete('/item/:id', (req, res) => {
     const id = req.params.id;
-    const userid = req.body;
+    const {userid} = req.body;
     knex
         .select('*')
         .from('items')
         .where('id', id)
         .del()
         .then(async function (result) {
-            const allitems = await knex('items').where(userid);
+            const allitems = await knex('items').where("userid", userid);
+            console.log(allitems)
             res.json(allitems); // respond back to request
         })
         .catch(err =>
