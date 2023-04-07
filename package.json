@@ -1,25 +1,19 @@
 {
-  "name": "back-end",
+  "name": "sdi-capstone",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "npm": "npm install",
-    "npm-front": "npm install --prefix ../inventory",
+    "npm": "npm install --prefix ./back-end",
+    "npm-front": "npm install --prefix ./inventory",
     "server": "nodemon server.js",
     "begin": "docker run --rm --name pg-docker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres",
     "reset": "npx knex migrate:rollback --all && npx knex migrate:latest && npx knex seed:run",
-    "start": "npm run npm && npm run npm-front && npm run begin && npm run server",
+    "start": "npm run npm && npm run npm-front && npm run begin --prefix ./back-end && npm run server --prefix ./back-end",
+    "start-front": "npm start --prefix ./inventory",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "knex": "^2.4.2",
-    "nodemon": "^2.0.22",
-    "pg": "^8.10.0"
-  }
+  "license": "ISC"
 }

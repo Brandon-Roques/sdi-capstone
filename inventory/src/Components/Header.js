@@ -8,7 +8,7 @@ const Header = () => {
     const navigate = useNavigate();
     return (
         <Navbar sticky="top" bg="dark" variant="dark">
-                <Navbar.Brand onClick={() => navigate("/")}>Home</Navbar.Brand>
+                <Navbar.Brand style={{cursor: "pointer"}} onClick={() => navigate("/")}>Home</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
             {loggedin ? (<Nav>
                 <Nav.Item className="justif-content-end">
