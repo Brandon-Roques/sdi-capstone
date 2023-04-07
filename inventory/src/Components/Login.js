@@ -4,14 +4,19 @@ import { Context } from "../App";
 import { Button, Row, Col, Form, InputGroup } from 'react-bootstrap';
 
 const Login = () => {
-    const { users, setLoggedin, setSpecificuser } = React.useContext(Context);
+    const { users, setUsers, setLoggedin, setSpecificuser } = React.useContext(Context);
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    useEffect(() => {
+        fetch('http://localhost:4000/users')
+            .then(response => response.json())
+            .then(data => setUsers(data))
+    }, [])
     const logginCheck = () => {
         var login_check = 'no'
         users.map((user) => {
-            if(username === user.username && password === user.password) {
+            if (username === user.username && password === user.password) {
                 setLoggedin(true)
                 setSpecificuser(user)
                 login_check = 'yes'
@@ -33,7 +38,7 @@ const Login = () => {
                         <Form.Control placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setUsername(e.target.value)} />
                     </InputGroup>
                     <Form.Group md="auto">
-                        <Form.Control type="password" placeholder='Password' onChange={(e) => setPassword(e.target.value)}/>
+                        <Form.Control type="password" placeholder='Password' onChange={(e) => setPassword(e.target.value)} />
                     </Form.Group>
                     <Button md="auto" varient="primary" onClick={() => logginCheck()}>Submit</Button>
                 </Col>

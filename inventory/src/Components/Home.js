@@ -4,7 +4,7 @@ import { Context } from '../App';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 
 const Home = () => {
-    const { users, loggedin, setLoggedin, moreInfo, setMoreInfo } = React.useContext(Context);
+    const { setMoreInfo } = React.useContext(Context);
     const navigate = useNavigate();
     const [items, setItems] = useState([])
     useEffect(() => {
@@ -13,11 +13,12 @@ const Home = () => {
             .then(data => setItems(data))
     }, [])
     return (
+        
         <Row>
             {items.map((item, index) => {
                 return (
-                        <Col md={{span:3, offset:1}} style={{marginBottom: 20}}>
-                            <Card className="text-center" style={{width: 400, minHeight: 260}}>
+                        <Col md={{span:4, offset: 1/2}} style={{marginBottom: 20}}>
+                            <Card className="text-center" style={{marginLeft: 100, marginTop: 50, width: 400, minHeight: 260}}>
                                 <Card.Header>User Added Item</Card.Header>
                                 <Card.Body>
                                     <Card.Title>{item.item_name}</Card.Title>

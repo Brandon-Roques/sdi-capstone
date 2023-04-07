@@ -13,22 +13,26 @@ const AddItem = () => {
         if (loggedin === false) navigate("/");
     }, [loggedin]);
     const inputNewItem = () => {
-        const dataToSend = {"userid": specificUser.userid, "item_name": itemName, "description": description, quantity: quantityy};
-        fetch(`http://localhost:4000/additem/${specificUser.userid}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(dataToSend),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                setUserData(data);
-                navigate('/profile')
+        if(!Number.isInteger(Number(quantityy))) alert('Please enter a number in the Quantity field')
+        else {
+            const dataToSend = {"userid": specificUser.userid, "item_name": itemName, "description": description, quantity: quantityy};
+            fetch(`http://localhost:4000/additem/${specificUser.userid}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(dataToSend),
             })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
+                .then((response) => response.json())
+                .then((data) => {
+                    setUserData(data);
+                    navigate('/profile')
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                });
+        }
+    
     };
     return (
         <>

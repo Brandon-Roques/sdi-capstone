@@ -99,11 +99,11 @@ const Profile = () => {
     }
     return (
         <>
-        {console.log('specificUser', specificUser)}
-        {console.log('userData', userData)}
+            {console.log('specificUser', specificUser)}
+            {console.log('userData', userData)}
             <Row>
-                <Col className="text-center">User Info</Col>
-                <Col className="text-center">User Items</Col>
+                <Col className="text-center" style={{ fontSize: 30, margin: 20 }}>User Info</Col>
+                <Col className="text-center" style={{ fontSize: 30, margin: 20 }}>User Items</Col>
             </Row>
             <Row>
                 <Col md={{ span: 6, offset: 6 }} className="text-center">
@@ -111,116 +111,121 @@ const Profile = () => {
                 </Col>
             </Row>
             <Row className="justify-content-center">
-                {updateInfo ? (
-                    <Col className="text-center">
-                        First Name: {specificUser.first_name} <br />
-                        Last Name: {specificUser.last_name} <br />
-                        Username: {specificUser.username} <br />
-                        Password: {specificUser.password} <br />
-                        <Button variant="primary" onClick={() => setUpdateInfo(false)}>
-                            Update/Change Info
-                        </Button>
-                    </Col>
-                ) : (
-                    <Col className="text-center">
-                        <InputGroup>
-                            <Form.Control
-                                placeholder="First Name"
-                                onChange={(e) => setFirstName(e.target.value)}
-                            />
-                        </InputGroup>
-                        <InputGroup>
-                            <Form.Control
-                                placeholder="Last Name"
-                                onChange={(e) => setLastname(e.target.value)}
-                            />
-                        </InputGroup>
-                        <InputGroup>
-                            <Form.Control
-                                placeholder="Username"
-                                onChange={(e) => setUsername(e.target.value)}
-                            />
-                        </InputGroup>
-                        <InputGroup>
-                            <Form.Control
-                                placeholder="Password"
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                        </InputGroup>
-                        <Button variant="primary" onClick={sendUpdate}>
-                            Change
-                        </Button>{" "}
-                        <Button variant="primary" onClick={() => setUpdateInfo(true)}>
-                            Go Back
-                        </Button>
-                    </Col>
-                )}
-                <Col className="text-center">
-                    {updateItem[0] ? userData.map((item) => {
-                        return (
-                            <Card className="text-center" style={{ width: "400px" }}>
-                                <Card.Header>User Added Item</Card.Header>
-                                <Card.Body>
-                                    <Card.Title>{item.item_name}</Card.Title>
-                                    <Card.Text>Description: {item.description.length < 100 ? item.description : item.description.slice(0, 99) + "..." } <br /> Quantity: {item.quantity}</Card.Text>
-                                    <Button className="m-3" variant="primary" onClick={() => setUpdateItem([false, item.id])}>Edit</Button>
-                                    <Button classname="m-3" variant="primary" onClick={() => deleteItem(item.id)}>Delete</Button> <br />
-                                    <Button classname="m-3" variant="primary" onClick={() => {
-                                        setMoreInfo(item)
-                                        navigate('/moreinfo')
-                                    }}>More Info</Button>
-                                </Card.Body>
-                            </Card>
-                        )
-                    }) : userData.map((item) => {
-                        if (!Array.isArray(updateItem[1]) && item.id === updateItem[1]) {
+                <Col>
+                    {updateInfo ? (
+                        <Col className="text-center">
+                            First Name: {specificUser.first_name} <br />
+                            Last Name: {specificUser.last_name} <br />
+                            Username: {specificUser.username} <br />
+                            Password: {specificUser.password} <br />
+                            <Button variant="primary" onClick={() => setUpdateInfo(false)}>
+                                Update/Change Info
+                            </Button>
+                        </Col>
+                    ) : (
+                        <Col className="text-center">
+                            <InputGroup>
+                                <Form.Control
+                                    placeholder="First Name"
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                />
+                            </InputGroup>
+                            <InputGroup>
+                                <Form.Control
+                                    placeholder="Last Name"
+                                    onChange={(e) => setLastname(e.target.value)}
+                                />
+                            </InputGroup>
+                            <InputGroup>
+                                <Form.Control
+                                    placeholder="Username"
+                                    onChange={(e) => setUsername(e.target.value)}
+                                />
+                            </InputGroup>
+                            <InputGroup>
+                                <Form.Control
+                                    placeholder="Password"
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                            </InputGroup>
+                            <Button variant="primary" onClick={sendUpdate}>
+                                Change
+                            </Button>{" "}
+                            <Button variant="primary" onClick={() => setUpdateInfo(true)}>
+                                Go Back
+                            </Button>
+                        </Col>
+                    )}
+                </Col>
+                <Col className="text-center" >
+                    <Row>
+                        {updateItem[0] ? userData.map((item) => {
                             return (
-                                <Card className="text-center" style={{ width: "400px" }}>
-                                    <Card.Header>User Added Item</Card.Header>
-                                    <Card.Body>
-                                        <Card.Title>
-                                            <InputGroup>
-                                            Item Name:
-                                                <Form.Control
-                                                    placeholder={item.item_name}
-                                                    onChange={(e) => setItemName(e.target.value)}
-                                                />
-                                            </InputGroup>
-                                            <InputGroup>
-                                            Description:
-                                                <Form.Control
-                                                    placeholder={item.description}
-                                                    onChange={(e) => setDescription(e.target.value)}
-                                                />
-                                            </InputGroup>
-                                            <InputGroup>
-                                            Quantity:
-                                                <Form.Control
-                                                    placeholder={item.quantity}
-                                                    onChange={(e) => setQuantityy(e.target.value)}
-                                                />
-                                            </InputGroup>
-                                        </Card.Title>
-                                        <Button className="m-3" variant="primary" onClick={() => itemUpdate(item.id)}>Submit</Button>
-                                        <Button classname="m-3" variant="primary" onClick={() => setUpdateItem([false, []])}>Go back</Button>
-                                    </Card.Body>
-                                </Card>
+                                <Col style={{ margin: 20, marginLeft: 60 }}>
+                                    <Card className="text-center" style={{ width: "400px" }}>
+                                        <Card.Header>User Added Item</Card.Header>
+                                        <Card.Body>
+                                            <Card.Title>{item.item_name}</Card.Title>
+                                            <Card.Text>Description: {item.description.length < 100 ? item.description : item.description.slice(0, 99) + "..."} <br /> Quantity: {item.quantity}</Card.Text>
+                                            <Button className="m-3" variant="primary" onClick={() => setUpdateItem([false, item.id])}>Edit</Button>
+                                            <Button classname="m-3" variant="primary" onClick={() => deleteItem(item.id)}>Delete</Button> <br />
+                                            <Button classname="m-3" variant="primary" onClick={() => {
+                                                setMoreInfo(item)
+                                                navigate('/moreinfo')
+                                            }}>More Info</Button>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
                             )
-                        } else {
-                            return (
-                                <Card className="text-center" style={{ width: "400px" }}>
-                                    <Card.Header>User Added Item</Card.Header>
-                                    <Card.Body>
-                                        <Card.Title>Item Name <br />{item.item_name}</Card.Title>
-                                        <Card.Text>Description: {item.description} <br /> Quantity: {item.quantity}</Card.Text>
-                                        <Button className="m-3" variant="primary" onClick={() => setUpdateItem([false, item.id])}>Edit</Button>
-                                        <Button classname="m-3" variant="primary" onClick={() => deleteItem(item.id)}>Delete</Button>
-                                    </Card.Body>
-                                </Card>
-                            )
-                        }
-                    })}
-
+                        }) : userData.map((item) => {
+                            if (!Array.isArray(updateItem[1]) && item.id === updateItem[1]) {
+                                return (
+                                    <Card className="text-center" style={{ width: "400px" }}>
+                                        <Card.Header>User Added Item</Card.Header>
+                                        <Card.Body>
+                                            <Card.Title>
+                                                <InputGroup>
+                                                    Item Name:
+                                                    <Form.Control
+                                                        placeholder={item.item_name}
+                                                        onChange={(e) => setItemName(e.target.value)}
+                                                    />
+                                                </InputGroup>
+                                                <InputGroup>
+                                                    Description:
+                                                    <Form.Control
+                                                        placeholder={item.description}
+                                                        onChange={(e) => setDescription(e.target.value)}
+                                                    />
+                                                </InputGroup>
+                                                <InputGroup>
+                                                    Quantity:
+                                                    <Form.Control
+                                                        placeholder={item.quantity}
+                                                        onChange={(e) => setQuantityy(e.target.value)}
+                                                    />
+                                                </InputGroup>
+                                            </Card.Title>
+                                            <Button className="m-3" variant="primary" onClick={() => itemUpdate(item.id)}>Submit</Button>
+                                            <Button classname="m-3" variant="primary" onClick={() => setUpdateItem([false, []])}>Go back</Button>
+                                        </Card.Body>
+                                    </Card>
+                                )
+                            } else {
+                                return (
+                                    <Card className="text-center" style={{ width: "400px" }}>
+                                        <Card.Header>User Added Item</Card.Header>
+                                        <Card.Body>
+                                            <Card.Title>Item Name <br />{item.item_name}</Card.Title>
+                                            <Card.Text>Description: {item.description} <br /> Quantity: {item.quantity}</Card.Text>
+                                            <Button className="m-3" variant="primary" onClick={() => setUpdateItem([false, item.id])}>Edit</Button>
+                                            <Button classname="m-3" variant="primary" onClick={() => deleteItem(item.id)}>Delete</Button>
+                                        </Card.Body>
+                                    </Card>
+                                )
+                            }
+                        })}
+                    </Row>
                 </Col>
             </Row>
         </>

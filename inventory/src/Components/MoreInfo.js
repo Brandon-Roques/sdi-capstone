@@ -13,7 +13,6 @@ const MoreInfo = () => {
                         <Card.Title>{moreInfo.item_name}</Card.Title>
                         <Card.Text>Description: {moreInfo.description} <br /> Quantity: {moreInfo.quantity}</Card.Text>
                     </Card.Body>
-                    <Card.Footer className="text-muted">2 days ago</Card.Footer>
                 </Card>
             </Col>
         </Row>

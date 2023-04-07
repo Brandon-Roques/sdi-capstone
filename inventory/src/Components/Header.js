@@ -1,17 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Nav } from "react-bootstrap";
+import { Nav, Navbar, Container } from "react-bootstrap";
 import { Context } from "../App";
 
 const Header = () => {
     const { users, loggedin, setLoggedin } = React.useContext(Context);
     const navigate = useNavigate();
     return (
-        <Nav>
-            <Nav.Item>
-                <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
-            </Nav.Item>
-            {loggedin ? (<>
+        <Navbar sticky="top" bg="dark" variant="dark">
+                <Navbar.Brand onClick={() => navigate("/")}>Home</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            {loggedin ? (<Nav>
                 <Nav.Item className="justif-content-end">
                     <Nav.Link onClick={() => navigate("/profile")}>Profile</Nav.Link>
                 </Nav.Item>
@@ -21,19 +20,19 @@ const Header = () => {
                         navigate("/")
                     }}>Signout</Nav.Link>
                 </Nav.Item>
-            </>
+            </Nav>
 
             ) : (
-                <>
+                <Nav>
                 <Nav.Item className="justif-content-end">
                     <Nav.Link onClick={() => navigate("/login")}>Login</Nav.Link>
                 </Nav.Item>
                  <Nav.Item className="justif-content-end">
                  <Nav.Link onClick={() => navigate("/signup")}>Sign Up</Nav.Link>
              </Nav.Item>
-             </>
+             </Nav>
             )}
-        </Nav>
+        </Navbar>
     );
 };
 

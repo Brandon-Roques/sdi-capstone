@@ -19,11 +19,6 @@ const App = () => {
   const [userData, setUserData] = useState([]);
   const [moreInfo, setMoreInfo] = useState([])
   const navigate = useNavigate();
-  useEffect(() => {
-    fetch('http://localhost:4000/users')
-      .then(response => response.json())
-      .then(data => setUsers(data))
-  }, [])
   return (
     <>
       <Context.Provider value={{ users, setUsers, loggedin, setLoggedin, specificUser, setSpecificuser, userData, setUserData, moreInfo, setMoreInfo }} >
