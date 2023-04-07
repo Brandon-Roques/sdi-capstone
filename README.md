@@ -12,11 +12,14 @@
 - Run "npm start" in the root directory of one of the two folders. 
   - this is going to install node_modules in both the back-end and inventory folders
   - this will also create a docker container
+
 -After all the processing is done and you're able to type in the terminal again, run "npm create_db"
   - this is going to create the database in which the knexfile.js connects to
   - this will also start the backend server
+
 -After the back-end server is running, go into the other termainal and run "cd inventory"
   - this will bring you into the 'inventory' directory
+  
 -Once in the 'inventory' directory, run "npm start"
   - this will start the React app and you should be able to navigate to your brower and see the web app
         
