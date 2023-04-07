@@ -7,9 +7,10 @@
     "npm": "npm install --prefix ./back-end",
     "npm-front": "npm install --prefix ./inventory",
     "begin": "docker run --rm --name pg-docker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres",
+    "suprise": "docker exec -it pg-docker psql -U postgres -c \"CREATE DATABASE capstone;\"",
     "db": "npx knex migrate:latest && npx knex seed:run",
-    "start": "npm run npm && npm run npm-front && npm run begin --prefix ./back-end && npm run db --prefix ./back-end && npm run server --prefix ./back-end",
-    "start-front": "npm start --prefix ./inventory",
+    "start": "npm run npm && npm run npm-front && npm run begin --prefix ./back-end",
+    "create_db": "npm run suprise --prefix ./back-end && npm run db --prefix ./back-end &&  npm run server --prefix ./back-end",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

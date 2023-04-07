@@ -162,7 +162,7 @@ const Profile = () => {
                         {updateItem[0] ? userData.map((item) => {
                             return (
                                 <Col style={{ margin: 20, marginLeft: 60 }} md={{span:4}}>
-                                    <Card className="text-center" style={{ width: "400px", margin:20 }}>
+                                    <Card className="text-center" style={{ width: "400px", margin:20, minHeight: 350 }}>
                                         <Card.Header>User Added Item</Card.Header>
                                         <Card.Body>
                                             <Card.Title>{item.item_name}</Card.Title>
@@ -181,7 +181,7 @@ const Profile = () => {
                             if (!Array.isArray(updateItem[1]) && item.id === updateItem[1]) {
                                 return (
                                     <Col style={{ margin: 20, marginLeft: 60 }} md={{span:4}}>
-                                    <Card className="text-center" style={{ width: "400px" }}>
+                                    <Card className="text-center" style={{ width: "400px", minHeight: 350 }}>
                                         <Card.Header>User Added Item</Card.Header>
                                         <Card.Body>
                                             <Card.Title>
@@ -216,11 +216,11 @@ const Profile = () => {
                             } else {
                                 return (
                                     <Col style={{ margin: 20, marginLeft: 60 }} md={{span:4}}>
-                                    <Card className="text-center" style={{ width: "400px" }}>
+                                    <Card className="text-center" style={{ width: "400px", minHeight: 350 }}>
                                         <Card.Header>User Added Item</Card.Header>
                                         <Card.Body>
                                             <Card.Title>Item Name <br />{item.item_name}</Card.Title>
-                                            <Card.Text>Description: {item.description} <br /> Quantity: {item.quantity}</Card.Text>
+                                            <Card.Text>Description: {item.description.length < 100 ? item.description : item.description.slice(0, 99) + "..."} <br /> Quantity: {item.quantity}</Card.Text>
                                             <Button className="m-3" variant="primary" onClick={() => setUpdateItem([false, item.id])}>Edit</Button>
                                             <Button classname="m-3" variant="primary" onClick={() => deleteItem(item.id)}>Delete</Button>
                                         </Card.Body>
