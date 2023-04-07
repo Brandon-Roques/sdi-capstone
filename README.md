@@ -10,8 +10,8 @@
 - Ensure docker is installed on your machine. 
 - Once in VS Code, open two terminals so you can run the following commands in each
 - Run "npm start" in the root directory of one of the two folders. 
-                - this is going to install node_modules in both the back-end and inventory folders
-                - this will also create a docker container
+                -this is going to install node_modules in both the back-end and inventory folders
+                * this will also create a docker container
 -After all the processing is done and you're able to type in the terminal again, run "npm create_db"
         - this is going to create the database in which the knexfile.js connects to
         - this will also start the backend server
