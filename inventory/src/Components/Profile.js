@@ -78,7 +78,7 @@ const Profile = () => {
         if (!Array.isArray(description)) {
             dataToSend["description"] = description;
         }
-        if (!Array.isArray(quantityy)) {
+        if (!Array.isArray(quantityy) && Number.isInteger(Number(quantityy)) === true) {
             dataToSend["quantity"] = quantityy;
         }
         fetch(`http://localhost:4000/item/${specificUser.userid}`, {
@@ -222,7 +222,11 @@ const Profile = () => {
                                             <Card.Title>Item Name <br />{item.item_name}</Card.Title>
                                             <Card.Text>Description: {item.description.length < 100 ? item.description : item.description.slice(0, 99) + "..."} <br /> Quantity: {item.quantity}</Card.Text>
                                             <Button className="m-3" variant="primary" onClick={() => setUpdateItem([false, item.id])}>Edit</Button>
-                                            <Button classname="m-3" variant="primary" onClick={() => deleteItem(item.id)}>Delete</Button>
+                                            <Button classname="m-3" variant="primary" onClick={() => deleteItem(item.id)}>Delete</Button> <br />
+                                                        <Button classname="m-3" variant="primary" onClick={() => {
+                                                setMoreInfo(item)
+                                                navigate('/moreinfo')
+                                            }}>More Info</Button>
                                         </Card.Body>
                                     </Card>
                                     </Col>
